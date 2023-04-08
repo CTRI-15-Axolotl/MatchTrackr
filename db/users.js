@@ -1,5 +1,6 @@
+// import express by using import
 const express = require('express');
-const app = require('express');
+const app = express();
 const path = require('path');
 const PORT = process.env.PORT || 3000;
 const router = require('./routes.js');
