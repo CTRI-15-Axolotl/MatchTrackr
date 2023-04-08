@@ -1,15 +1,15 @@
-const { query } = require('express');
+
 const { Pool } = require('pg');
-const PGURI =
+const PG_URI =
   'postgres://dvydrfmx:E4c39S_41mmFGhFvHD9XFAVgnvfHM_wI@heffalump.db.elephantsql.com/dvydrfmx';
 
 const pool = new Pool({
-  connectionString: PGURI,
+  connectionString: PG_URI,
 });
 
-module.exports({
+module.exports = {
   query: (text, params, callback) => {
-    console.log(text);
+    console.log('executing',text);
     return pool.query(text, params, callback);
   },
-});
+};

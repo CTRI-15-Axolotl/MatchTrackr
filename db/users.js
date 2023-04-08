@@ -3,12 +3,17 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const PORT = process.env.PORT || 3000;
-const router = require('./routes.js');
+const Userrouter = require('./route/routes');
 
 app.use(express.json());
+app.use(express.urlencoded({extended:true}));
 
-app.use('/login', router);
+app.use('/login', Userrouter);
 
+// app.get('/', (req,res) => {
+
+//   res.status(200).sendFile(path.resolve(__dirname,'../index.html'));
+// })
 /**
  * express error handler`
  */
