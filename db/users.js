@@ -9,7 +9,7 @@ app.use(express.json());
 app.use('/login', router);
 
 /**
- * express error handler
+ * express error handler`
  */
 
 app.use((err, req, res, next) => {

@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
-import PlayerCards from './PlayerCard';
+import PlayerCards from '../dashboard/PlayerCard';
 import Searchbar from './Searchbar'
 
 export default function Dashboard() {
-
-    
     return (
       <div >
         <h1>Dashboard</h1>
@@ -13,4 +11,4 @@ export default function Dashboard() {
         <PlayerCards />
       </div>
     )
-  }
+}

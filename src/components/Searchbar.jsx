@@ -13,6 +13,16 @@ const [searchInput, setSearchInput] = useState("");
     }
 
     // https://api.pandascore.co/lol/players?search[name]=faker
+    // we'll send the fetch request to the backend server
+    // server will then make an API call and filter the results
+    // server will send a response of exactly what we want 
+
+    // this is what we want as our response:
+      // Player Name
+      // image of the player
+      // upcoming match
+      
+
 
 
     return (
@@ -26,4 +36,4 @@ const [searchInput, setSearchInput] = useState("");
         <button onClick={searchPlayer}> Search </button>
       </div>
     )
-  }
+}
