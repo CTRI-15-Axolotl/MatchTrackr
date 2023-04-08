@@ -3,16 +3,18 @@ import SearchResults from './SearchResults';
 import { useNavigate } from 'react-router-dom'; 
 
 export default function Searchbar() {
-const [searchInput, setSearchInput] = useState("");
+    const [searchInput, setSearchInput] = useState("");
+    const navigate = useNavigate();
 
     function searchResults(e) {
         setSearchInput(e.target.value)
-    }
-
-    function searchPlayer() {
-        // fetch(`https://api.pandascore.co/valorant/players?search[name]=${searchInput}`)
         console.log(searchInput)
     }
+
+    // function searchPlayer() {
+    //     // fetch(`https://api.pandascore.co/valorant/players?search[name]=${searchInput}`)
+    //     console.log(searchInput)
+    // }
 
     // https://api.pandascore.co/lol/players?search[name]=faker
     // we'll send the fetch request to the backend server
@@ -24,6 +26,12 @@ const [searchInput, setSearchInput] = useState("");
       // image of the player
       // upcoming match
       
+    //Temporary function to navigate to search results page
+    //WIP: To fetch data and populate search results page
+
+    function goToResultsPage() {
+        navigate('/searchresults', searchInput)
+    }
 
 
 
@@ -35,7 +43,7 @@ const [searchInput, setSearchInput] = useState("");
             onChange={searchResults}
             value={searchInput}
         />
-        <button onClick={searchPlayer}> Search </button>
+        <button onClick={goToResultsPage}> Search </button>
       </div>
     )
 }
