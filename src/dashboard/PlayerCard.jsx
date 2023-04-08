@@ -7,7 +7,6 @@ function PlayerCards() {
   
     return (
       <div className="App">
-        <h1>dashboard player card</h1>
         <div
           className="player-card"
           style={{
