@@ -3,24 +3,37 @@ import CardsDisplay from '../dashboard/CardsDisplay'
 
 const CardsContainer = props => {
 
-    // Send a request to server for this user's list of fav players
-    // Should recieve Object with fav players and their info
-    // loop through the receieved/response Object and add them as attributes to Cards Display
-    // wanted response:
+    /** Upon Search
+     * Frontend sends get request to server with search term
+     * Server will make an API req to Pandascore, Server will send frontend a response 
+     * loop through the receieved/response Object and add them as attributes to Cards Display
+     */
+
+    /** Upon LogIn/landing to dashboard
+     * Frontend send request to server to identify this user's fav players
+     * Server will make an API req to Pandascore, Server will send frontend a response 
+     * loop through the receieved/response Object and add them as attributes to Cards Display
+     */
+
+
+    // Response Example:
     /**
      * [
      *  {name:Asuna, 
      *     team: 100T,
-     *     upcoming match:5pmetc..},
+     *     upcomingMatch:5pmetc..},
      *  {name:Zellsis, 
      *     team: C9,
-     *     upcoming match:5pmetc..},
+     *     upcomingMatch:5pmetc..},
      * ]
      */
 
     /*
     example:
-    for (const i in this)
+    const players = []
+    for (const obj in res.body) {
+        players.push(<CardsDisplay name=`${name}` team=`${team}`name=`${upcomingMatch}`/>)
+    }
     
     */
 
