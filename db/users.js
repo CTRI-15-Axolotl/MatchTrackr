@@ -4,11 +4,14 @@ const app = express();
 const path = require('path');
 const PORT = process.env.PORT || 3000;
 const Userrouter = require('./route/routes');
+const favrouter = require('./route/fav');
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
 app.use('/login', Userrouter);
+
+app.use('/fav',favrouter);
 
 // app.get('/', (req,res) => {
 
