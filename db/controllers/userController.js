@@ -70,7 +70,6 @@ UserController.searchPlayer = (req, res, next) => {
   )
     .then((result) => result.json())
     .then(result => {
-      console.log(result)
       res.locals.searchResult = result;
       next();
     })

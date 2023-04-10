@@ -45,31 +45,38 @@ import PlayerCards from '../dashboard/PlayerCard';
 
 
 /////////////// TEST PLAYEROBJECT//////////////////
-const serverResponse = [{
-    playerName: 'Secret',
-    imgUrls: 'https://cdn.pandascore.co/images/player/image/32466/600px_secret_at_first_strike_korea.png',
-    teamName: 'Maru Gaming',
-    UpcomingMatches: [
-        {against: 'Northepcion',
-        time: 'Tuesday 5pm ET'},
-        {against: 'DRX',
-        time: 'Thurdsay 5pm ET'},
-        {against: 'Zeta Division',
-        time: ' Saturday 5pm ET'}
-    ]
-}]
+// const serverResponse = [{
+//     playerName: 'Secret',
+//     imgUrls: 'https://cdn.pandascore.co/images/player/image/32466/600px_secret_at_first_strike_korea.png',
+//     teamName: 'Maru Gaming',
+//     UpcomingMatches: [
+//         {against: 'Northepcion',
+//         time: 'Tuesday 5pm ET'},
+//         {against: 'DRX',
+//         time: 'Thurdsay 5pm ET'},
+//         {against: 'Zeta Division',
+//         time: ' Saturday 5pm ET'}
+//     ]
+// }]
 
 
 const CardDisplay = (props) => {
     
 const players = []
-for (const obj in serverResponse) { // serverResponse is the response from the server, will be res.body later
-    players.push(<PlayerCards playerName={obj.playerName} 
-        key={obj.playerName+obj.teamName}
-        imgUrls={obj.imgUls}
-        teamName={obj.teamName} 
-        upcomingMatches={obj.UpcomingMatches}
-        />)
+for (const obj of props.serverResponse) { // serverResponse is the response from the server, will be res.body later
+    // console.log(obj.current_team['acronym'] + " THIS IS THE TEAM INFO")
+    if (obj.current_team !== null) {
+        if(obj.image_url === null){
+            obj.image_url = 'http://clipart-library.com/images_k/person-head-silhouette/person-head-silhouette-2.png'
+        }
+        players.push(<PlayerCards playerName={obj.name} 
+            key={obj.name}
+            imgUrls={obj.image_url}
+            // teamName={obj.current_team['acronym']} 
+            teamName={obj.current_team.name} 
+            // upcomingMatches={obj.UpcomingMatches}
+            />)
+    }
 }
 
     return (

@@ -11,7 +11,7 @@ const location = useLocation();
             <header>
                 {location.pathname === '/dashboard' ? (<h1>Favorite Players</h1>) : (<h4>Search Result</h4>)}
             </header>
-            <CardsDisplay />
+            <CardsDisplay serverResponse={props.serverResponse} />
         </div>
     )
 }
