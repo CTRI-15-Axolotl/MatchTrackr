@@ -5,6 +5,7 @@ const path = require('path');
 const PORT = process.env.PORT || 3000;
 const Userrouter = require('./route/routes');
 const favrouter = require('./route/fav');
+const dashboardrouter = require('./route/dashboardrouter');
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
@@ -12,6 +13,8 @@ app.use(express.urlencoded({extended:true}));
 app.use('/login', Userrouter);
 
 app.use('/fav',favrouter);
+
+app.use('/dashboard', dashboardrouter);
 
 // app.get('/', (req,res) => {
 
