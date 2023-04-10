@@ -1,9 +1,23 @@
 import { useState } from 'react';
 
+// const serverResponse = [{
+//   playerName: 'Secret',
+//   imgUrls: 'https://cdn.pandascore.co/images/player/image/32466/600px_secret_at_first_strike_korea.png',
+//   teamName: 'Maru Gaming',
+//   UpcomingMatches: [
+//       {against: 'Northepcion',
+//       time: 'Tuesday 5pm ET'},
+//       {against: 'DRX',
+//       time: 'Thurdsay 5pm ET'},
+//       {against: 'Zeta Division',
+//       time: ' Saturday 5pm ET'}
+//   ]
+// }]
 
 
-function PlayerCards() {
+function PlayerCards({playerName, imgUrls, teamName, upcomingMatch}) {
     const [count, setCount] = useState(0);
+    console.log(playerName + " PLayer name is here")
   
     return (
       <div className="App">
@@ -30,7 +44,7 @@ function PlayerCards() {
                 display: 'inline-block',
               }}
             >
-              Kim "Secret" Ha-jin
+              {playerName}
             </h2>
             {/* an image aligned on the right of the div with the url https://cdn.pandascore.co/images/player/image/32466/600px_secret_at_first_strike_korea.png */}
             <img
@@ -85,3 +99,10 @@ function PlayerCards() {
   
   export default PlayerCards;
   
+  // what needs to be displayed: (needs to be propdrilled)
+  // Player Name
+  // Player Image
+  // Upcoming Matches
+    // Match 1
+    // Match 2
+    // Match 3

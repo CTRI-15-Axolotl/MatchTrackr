@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import SearchResults from './SearchResults';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate, Routes, Route, Link } from 'react-router-dom';
 
 export default function Searchbar() {
     const [searchInput, setSearchInput] = useState("");
@@ -30,20 +30,21 @@ export default function Searchbar() {
     //WIP: To fetch data and populate search results page
 
     function goToResultsPage() {
-        navigate('/searchresults', searchInput)
+        navigate(`/searchresults/${searchInput}`)
     }
-
-
 
     return (
       <div >
+        {/* <Routes>
+          <Route path={`/searchresults/${searchInput}`} element={<SearchResults searchInput={searchInput} />} />
+        </Routes> */}
         <input
-            type="text"
-            placeholder="Favorite Player?" 
-            onChange={searchResults}
-            value={searchInput}
-        />
-        <button onClick={goToResultsPage}> Search </button>
+              type="text"
+              placeholder="Favorite Player?" 
+              onChange={searchResults}
+              value={searchInput}
+          />
+          <button onClick={goToResultsPage}> Search </button>
       </div>
     )
 }
