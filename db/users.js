@@ -9,7 +9,13 @@ const dashboardrouter = require('./route/dashboardrouter');
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
-
+// Allow cross-origin requests from any origin
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  next();
+});
 app.use('/login', Userrouter);
 
 app.use('/fav',favrouter);
@@ -23,6 +29,8 @@ app.use('/dashboard', dashboardrouter);
 /**
  * express error handler`
  */
+
+
 
 app.use((err, req, res, next) => {
   const defaultErr = {

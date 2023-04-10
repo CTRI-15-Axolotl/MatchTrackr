@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import { useLocation } from 'react-router-dom';
 // const serverResponse = [{
 //   playerName: 'Secret',
 //   imgUrls: 'https://cdn.pandascore.co/images/player/image/32466/600px_secret_at_first_strike_korea.png',
@@ -13,11 +13,14 @@ import { useState } from 'react';
 //       time: ' Saturday 5pm ET'}
 //   ]
 // }]
+//{playerName, imgUrls, teamName, upcomingMatch}
 
-
-function PlayerCards({playerName, imgUrls, teamName, upcomingMatch}) {
+function PlayerCards(props) {
     const [count, setCount] = useState(0);
-    console.log(playerName + " PLayer name is here")
+
+    const location = useLocation();
+    console.log(props)
+    console.log(props.playerName + " PLayer name is here")
   
     return (
       <div className="App">
@@ -44,12 +47,12 @@ function PlayerCards({playerName, imgUrls, teamName, upcomingMatch}) {
                 display: 'inline-block',
               }}
             >
-              {playerName}
+              {props.playerName}
             </h2>
             {/* an image aligned on the right of the div with the url https://cdn.pandascore.co/images/player/image/32466/600px_secret_at_first_strike_korea.png */}
             <img
               className="player-card__image"
-              src="https://cdn.pandascore.co/images/player/image/32466/600px_secret_at_first_strike_korea.png"
+              src={props.imgUrls}
               alt="Secret"
               style={{
                 // make the image aligned on the right
@@ -65,44 +68,42 @@ function PlayerCards({playerName, imgUrls, teamName, upcomingMatch}) {
               overflow: 'hidden',
             }}
           >
-            <div className="player-card__matches__match">
-              <h3>Match 1</h3>
-              <p>Value 1</p>
+            {/* <div className="player-card__matches__match">
+              <h3>{props.teamName} VS {props.upcomingMatches[0].against}</h3>
+              <p>{props.upcomingMatches[0].time}</p>
             </div>
             <div className="player-card__matches__match">
-              <h3>Match 2</h3>
-              <p>Value 2</p>
+              <h3>{props.teamName} VS {props.upcomingMatches[1].against}</h3>
+              <p>{props.upcomingMatches[1].time}</p>
             </div>
             <div className="player-card__matches__match">
-              <h3>Match 3</h3>
-              <p>Value 3</p>
-            </div>
+              <h3>{props.teamName} VS {props.upcomingMatches[2].against}</h3>
+              <p>{props.upcomingMatches[2].time}</p>
+            </div> */}
           </div>
           <div className="player-card__actions">
-            <button
-              className="player-card__actions__action"
-              onClick={() => console.log('Action 1')}
-            >
-              Action 1
-            </button>
-            <button
-              className="player-card__actions__action"
-              onClick={() => console.log('Delete from players')}
-            >
-              Delete from players
-            </button>
+            {location.pathname === '/dashboard' ? 
+              (<button className="player-card__actions__action" onClick={() => console.log('Delete from players')}>
+                Delete
+              </button>) 
+              : 
+              (<button className="player-card__actions__action" onClick={() => console.log('Action 1')}>
+              Favorite 
+              </button>)}
           </div>
         </div>
       </div>
     );
   }
-  
+
+
+
   export default PlayerCards;
   
-  // what needs to be displayed: (needs to be propdrilled)
+  /* // what needs to be displayed: (needs to be propdrilled)
   // Player Name
   // Player Image
   // Upcoming Matches
     // Match 1
     // Match 2
-    // Match 3
+    // Match 3 */
