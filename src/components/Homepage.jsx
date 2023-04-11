@@ -15,7 +15,7 @@ function Home() {
   
     return (
       <div >
-        <h1>This is the homepage!</h1>
+        <h1>Match Trackr</h1>
         <button onClick={navigateLogin}>Login</button>
         <button onClick={navigateSignup}>Sign-up</button>
       </div>

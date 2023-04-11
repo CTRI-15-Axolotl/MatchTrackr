@@ -22,16 +22,7 @@ const serverResponse = [{
   ]
 }]
 
-// const players = []
-// for (const obj of props.serverResponse) { // serverResponse is the response from the server, will be res.body later
-//     // console.log(obj.current_team['acronym'] + " THIS IS THE TEAM INFO")
-//     players.push(<PlayerCards playerName={obj.name} 
-//         key={obj.name}
-//         imgUrls={obj.image_url}
-//         teamName={obj.current_team['acronym']} 
-//         // upcomingMatches={obj.UpcomingMatches}
-//         />)
-// }
+// api call to server, server will give up response of the fav info
 
     return (
       <div >

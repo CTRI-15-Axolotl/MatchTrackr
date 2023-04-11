@@ -75,6 +75,7 @@ for (const obj of props.serverResponse) { // serverResponse is the response from
             // teamName={obj.current_team['acronym']} 
             teamName={obj.current_team.name} 
             // upcomingMatches={obj.UpcomingMatches}
+            playerInfo={obj}
             />)
     }
 }

@@ -16,85 +16,109 @@ import { useLocation } from 'react-router-dom';
 //{playerName, imgUrls, teamName, upcomingMatch}
 
 function PlayerCards(props) {
-    const [count, setCount] = useState(0);
+  // using useLocation hook to determine which button to render
+  const location = useLocation();
 
-    const location = useLocation();
-    console.log(props)
-    console.log(props.playerName + " PLayer name is here")
-  
-    return (
-      <div className="App">
-        <div
-          className="player-card"
+  function favoritePlayer() {
+    console.log(props.playerInfo + " PLAYER INFO HERE")
+    fetch('http://localhost:3000/fav/searchplayer', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(props.playerInfo)
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error(error));
+  }
+
+  return (
+    <div className="App">
+      <div
+        className="player-card"
+        style={{
+          // make the backgroundColor #161419
+          backgroundColor: '#161419',
+        }}
+      >
+        <div className="player-card__header"
           style={{
-            // make the backgroundColor #161419
-            backgroundColor: '#161419',
+            // make all content in the div stretch the size of the div
+            // while still making the player-card__image aligned right
+            display: 'flex',
           }}
         >
-          <div className="player-card__header"
+          <h2
+            className="player-card__title"
             style={{
-              // make all content in the div stretch the size of the div
-              // while still making the player-card__image aligned right
-              display: 'flex',
+              // align the text left
+              textAlign: 'left',
+              // make h2 on the same line as the img
+              display: 'inline-block',
             }}
           >
-            <h2
-              className="player-card__title"
-              style={{
-                // align the text left
-                textAlign: 'left',
-                // make h2 on the same line as the img
-                display: 'inline-block',
-              }}
-            >
-              {props.playerName}
-            </h2>
-            {/* an image aligned on the right of the div with the url https://cdn.pandascore.co/images/player/image/32466/600px_secret_at_first_strike_korea.png */}
-            <img
-              className="player-card__image"
-              src={props.imgUrls}
-              alt="Secret"
-              style={{
-                // make the image aligned on the right
-                marginLeft: 'auto',
-                // make the image 200 pixels wide
-                width: '200px',
-              }}
-            />
-          </div>
-          <div className="player-card__matches"
+            {props.playerName}
+          </h2>
+          {/* an image aligned on the right of the div with the url https://cdn.pandascore.co/images/player/image/32466/600px_secret_at_first_strike_korea.png */}
+          <img
+            className="player-card__image"
+            src={props.imgUrls}
+            alt="Secret"
             style={{
-              // make divs within player-card__matches not collide with div above
-              overflow: 'hidden',
+              // make the image aligned on the right
+              marginLeft: 'auto',
+              // make the image 200 pixels wide
+              width: '200px',
             }}
-          >
-            {/* <div className="player-card__matches__match">
-              <h3>{props.teamName} VS {props.upcomingMatches[0].against}</h3>
-              <p>{props.upcomingMatches[0].time}</p>
+          />
+        </div>
+
+
+        <div className="player-card__matches"
+          style={{
+            // make divs within player-card__matches not collide with div above
+            overflow: 'hidden',
+          }}
+        >
+
+        {location.pathname === '/dashboard' ?
+
+          (<div>
+            <div className="player-card__matches__match">
+              <h3>MARU vs Northepcion</h3>
+              <p>Tuesday 5:00pm CT </p>
             </div>
             <div className="player-card__matches__match">
-              <h3>{props.teamName} VS {props.upcomingMatches[1].against}</h3>
-              <p>{props.upcomingMatches[1].time}</p>
+              <h3>MARU vs DRX</h3>
+              <p>Thursday 6:00 CT</p>
             </div>
             <div className="player-card__matches__match">
-              <h3>{props.teamName} VS {props.upcomingMatches[2].against}</h3>
-              <p>{props.upcomingMatches[2].time}</p>
-            </div> */}
+              <h3>MARU vs Zeta Division</h3>
+              <p>Saturday 5:00 CT</p>
+            </div>
           </div>
-          <div className="player-card__actions">
-            {location.pathname === '/dashboard' ? 
-              (<button className="player-card__actions__action" onClick={() => console.log('Delete from players')}>
-                Delete
-              </button>) 
-              : 
-              (<button className="player-card__actions__action" onClick={() => console.log('Action 1')}>
-              Favorite 
-              </button>)}
-          </div>
+          )
+          : (<p> Matches </p>)
+
+        }
+
+        </div>
+        
+        <div className="player-card__actions">
+          {location.pathname === '/dashboard' ? 
+            (<button className="player-card__actions__action" onClick={() => console.log('Delete from players')}>
+              Delete
+            </button>) 
+            : 
+            (<button className="player-card__actions__action" onClick={() => favoritePlayer()}>
+            Favorite 
+            </button>)}
         </div>
       </div>
-    );
-  }
+    </div>
+  );
+}
 
 
 
