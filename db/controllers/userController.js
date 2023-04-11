@@ -66,8 +66,8 @@ UserController.searchPlayer = (req, res, next) => {
     }
   )
     .then((result) => result.json())
-    .then(result => {
-      console.log(result)
+    .then((result) => {
+      console.log(result);
       res.locals.searchResult = result;
       next();
     })
@@ -82,17 +82,14 @@ UserController.searchPlayer = (req, res, next) => {
 ////////////////////////////////////////////////////////////
 
 UserController.savePlayer = (req, res, next) => {
+  console.log(req.body);
   const fav_user = 1;
   const current_team_acronym = req.body.favorite.current_team.acronym;
   const current_team_id = req.body.favorite.current_team.id;
   const current_team_image_url = req.body.favorite.current_team.image_url;
   const current_team_name = req.body.favorite.current_team.name;
-  const { 
-    first_name, 
-    image_url, 
-    last_name, 
-    name
-   } = req.body.favorite.current_team;
+  const { first_name, image_url, last_name, name } =
+    req.body.favorite.current_team;
 
   const queryStr =
     'INSERT INTO favlist (fav_user, current_team_acronym, current_team_id, current_team_image_url, current_team_name, first_name, image_url, last_name, name) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9) RETURNING*';
@@ -124,12 +121,12 @@ UserController.savePlayer = (req, res, next) => {
 //   "age": 18,
 //   "birthday": "2004-05-15",
 //   "current_team": { // JSONstring of this
-//    *  "acronym": "MARU",
-//    *  "id": 130206,
-//    *  "image_url": "https://cdn.pandascore.co/images/team/image/130206/600px_maru_gaming_allmode.png",
+//      "acronym": "MARU",
+//      "id": 130206,
+//      "image_url": "https://cdn.pandascore.co/images/team/image/130206/600px_maru_gaming_allmode.png",
 //       "location": "KR",
 //       "modified_at": "2023-04-08T15:48:56Z",
-//    *  "name": "Maru Gaming",
+//      "name": "Maru Gaming",
 //       "slug": "maru-gaming"
 //   },
 //   "current_videogame": {
@@ -153,17 +150,37 @@ UserController.savePlayer = (req, res, next) => {
 UserController.getDashboard = (req, res, next) => {
   const queryStr = 'SELECT * from favlist WHERE fav_user = 1';
   db.query(queryStr)
-  .then((result) => result.json())
-  .then((result) => {
-    res.locals.dashboard = result;
-  })
+    .then((result) => result.json())
+    .then((result) => {
+      res.locals.dashboard = result;
+      next();
+    })
+    .catch((err) => {
+      next({
+        log: `UserController.getDashboard: ERROR: ${err} `,
+        message: { err: `Error occured in UserController.getDashboard` },
+      });
+    });
 };
 
 ///////////////////////////////////////////////////////////
 
-UserController.getMatches = (req,res,next) => {
-  fe
-
-}
+UserController.getMatches = (req, res, next) => {
+  const { current_team_id } = res.locals.dashboard;
+  fetch(
+    `https://api.pandascore.co/teams/${current_team_id}/matches?filter[future]=true&sort=begin_at&page=1&per_page=3`
+  )
+    .then((result) => result.json())
+    .then((result) => {
+      res.locals.matches = result;
+      next();
+    })
+    .catch((err) => {
+      next({
+        log: `UserController.getMatches: ERROR: ${err} `,
+        message: { err: `Error occured in UserController.getMatches` },
+      });
+    });
+};
 
 module.exports = UserController;
