@@ -15,6 +15,7 @@ function Home() {
   
     return (
       <div >
+        <img src='../../assets/MatchTrackr-logo.png' alt='MatchTrackr logo' />
         <h1>This is the homepage!</h1>
         <button onClick={navigateLogin}>Login</button>
         <button onClick={navigateSignup}>Sign-up</button>
